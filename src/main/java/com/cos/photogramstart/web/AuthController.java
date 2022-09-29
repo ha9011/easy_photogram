@@ -6,6 +6,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.cos.photogramstart.web.dto.auth.SignupDto;
+
 @Controller // IOC, 파일리턴 컨트롤러 <-> restController
 public class AuthController {
 
@@ -23,8 +25,8 @@ public class AuthController {
 	}
 	
 	@PostMapping("/auth/signup")
-	public String signup() {
-		
+	public String signup(SignupDto signupDto) {  // key-value (www-formen....)
+		log.info(signupDto.toString());
 		log.info("실행됨???->> 가입후 로그인페이지 이동");
 		
 		return "auth/signin";
