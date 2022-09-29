@@ -18,7 +18,7 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter{
 		.anyRequest().permitAll()// 나머지는 모두 허용
 		.and()
 		.formLogin()
-		.loginPage("/auth/signin")
+		.loginPage("/auth/signin") // and 이후로권한이 없을 경우, 해당 로그인 페이지로 ㅇ
 		.defaultSuccessUrl("/");
 	}
 }
