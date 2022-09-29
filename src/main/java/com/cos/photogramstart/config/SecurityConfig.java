@@ -11,6 +11,8 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter{
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
+		http.csrf().disable();
+		
 		// TODO Auto-generated method stub
 		//super.configure(http); // 이 친구가 가로채는 역할을함(인증없을 경우, 로그인 페이지로) //super을 지울 경우 -> 비활성
 		http.authorizeRequests()

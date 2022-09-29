@@ -26,7 +26,11 @@
                          <!--로고end-->
                          
                          <!--회원가입 인풋-->
-                        <form class="login__input" >
+                         <!--jsp로 security가 주기 때문에 input에  csrf토큰이 격납되어 전달된다. -->
+                         <!-- 따라서 postman에서 사용할수없  -->
+                     <!-- 따라서 security에서  csrf 비활성화 처리 -->    
+                     
+                        <form class="login__input"  action="/auth/signup" method="post">
                             <input type="text" name="username" placeholder="유저네임" required="required" />
                             <input type="password" name="password" placeholder="패스워드" required="required" />
                             <input type="email" name="email" placeholder="이메일" required="required" />
