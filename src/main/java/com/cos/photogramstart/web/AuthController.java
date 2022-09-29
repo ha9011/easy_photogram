@@ -1,5 +1,7 @@
 package com.cos.photogramstart.web;
 
+import javax.validation.Valid;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -41,7 +43,7 @@ public class AuthController {
 	}
 	
 	@PostMapping("/auth/signup")
-	public String signup(SignupDto signupDto) {  // key-value (www-formen....)
+	public String signup(@Valid SignupDto signupDto) {  // key-value (www-formen....)
 		log.info(signupDto.toString());
 		
 		// User라는 곳에  signupDto에 담아 전달할 것이다. .
