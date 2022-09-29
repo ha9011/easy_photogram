@@ -12,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cos.photogramstart.domain.user.User;
 import com.cos.photogramstart.service.AuthService;
@@ -48,7 +49,9 @@ public class AuthController {
 	}
 	
 	@PostMapping("/auth/signup")
-	public String signup(@Valid SignupDto signupDto, BindingResult bindingResult) {  // key-value (www-formen....) ,, // 유효성검사 하는 친
+	public @ResponseBody String signup(@Valid SignupDto signupDto, BindingResult bindingResult) {  // key-value (www-formen....) ,, // 유효성검사 하는 친
+		// @controller 지만,리턴타입 앞에 @ResponseBody 넣으면 결과는 텍스트로 전송
+		
 		log.info("**************");
 		log.info("**************");
 		// @valid 해서 유효성검사 오류시, bindingResult에 담김,
@@ -62,6 +65,8 @@ public class AuthController {
 				log.info("__유효성 검사 실패--");
 				log.info(error.getDefaultMessage());
 			}
+			
+			return "오류남";
 		}
 		
 		
@@ -78,6 +83,7 @@ public class AuthController {
 		log.info(uesrEntity.toString());
 		
 		
-		return "auth/signin";
+		return "auth/signin";  //유효성 오류일때는 데이터, 아닐땐 insert하고 페이지 이동인데 텍스트 전달하게됨...
+		// 따라서controllerAdvice를 만들어서 처리하기로함!! 
 	}
 }
