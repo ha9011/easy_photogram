@@ -11,6 +11,7 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter{
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
+		//CSRF토큰 비활성s
 		http.csrf().disable();
 		
 		// TODO Auto-generated method stub
