@@ -1,6 +1,5 @@
 package com.cos.photogramstart.handler;
 
-import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,6 +8,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cos.photogramstart.handler.ex.CustomValidationException;
+import com.cos.photogramstart.web.dto.CMRespDto;
 
 @RestController
 @ControllerAdvice // 모든 익셉션들을 낚아챔!!! (1)
@@ -23,8 +23,10 @@ public class ControllerExceptionHandler {
 	}
 	
 	@ExceptionHandler(CustomValidationException.class) //모든 에러중에 CustomValidationException을 낚아 챈다.
-	public Map<String, String> validationException2(CustomValidationException e) {
+	// 제네릭 ?는 추론이 가
+	public CMRespDto<?> validationException2(CustomValidationException e) {
 		log.info("--CustomValidationException 2낚아채기--");
-		return e.getErrorMap(); // 또 문제되는게 runtimeException getMessage는 String임.. 우린 map으로 담고싶다 
+		return new CMRespDto<>(-1, e.getMessage(), e.getErrorMap()); // 또 문제되는게 runtimeException getMessage는 String임.. 우린 map으로 담고싶다 
 	}
+
 }
