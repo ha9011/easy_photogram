@@ -3,6 +3,7 @@ package com.cos.photogramstart.web;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.management.RuntimeErrorException;
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cos.photogramstart.domain.user.User;
+import com.cos.photogramstart.handler.ex.CustomValidationException;
 import com.cos.photogramstart.service.AuthService;
 import com.cos.photogramstart.web.dto.auth.SignupDto;
 
@@ -66,7 +68,10 @@ public class AuthController {
 				log.info(error.getDefaultMessage());
 			}
 			
-			return "오류남";
+			//return "오류남";
+			//강제로 에러발생시키기
+			//throw new RuntimeException("유효성검사 실패함");
+			throw new CustomValidationException("유효성검사 ", errorMap);
 		}
 		
 		
