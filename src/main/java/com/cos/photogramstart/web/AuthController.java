@@ -51,7 +51,7 @@ public class AuthController {
 	}
 	
 	@PostMapping("/auth/signup")
-	public @ResponseBody String signup(@Valid SignupDto signupDto, BindingResult bindingResult) {  // key-value (www-formen....) ,, // 유효성검사 하는 친
+	public  String signup(@Valid SignupDto signupDto, BindingResult bindingResult) {  // key-value (www-formen....) ,, // 유효성검사 하는 친
 		// @controller 지만,리턴타입 앞에 @ResponseBody 넣으면 결과는 텍스트로 전송
 		
 		log.info("**************");
