@@ -18,8 +18,8 @@ public class UserUpdateDto {
 	// 필수값이 아닌것들이 데이터 없이 올때, 위험
 	public User toEntity() {
 		return User.builder()
-				.name(name)
-				.password(password)
+				.name(name) //password도 마찬가
+				.password(password)//패스워드를 기재 안했으면, 공백으로 넣어짐.. 문제가 됨 ->validation 체크 필
 				.website(website)
 				.bio(bio)
 				.gender(gender)

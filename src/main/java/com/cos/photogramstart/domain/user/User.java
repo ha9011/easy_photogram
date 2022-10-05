@@ -26,7 +26,7 @@ import lombok.NoArgsConstructor;
 public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY) // 범호 증가 전략이 데이터베이스를 따라간다. 
-	private Long id;
+	private int id;
 	
 	@Column(unique = true, length = 20)
 	private String username;

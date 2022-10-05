@@ -17,8 +17,9 @@ function update(userId, event) {
 		
 	}).done(res=>{
 		console.log("성공 ! ")
+		location.href = `/user/${userId}`
 	}).fail(err=>{
 		
 		console.log("실패!! ")
 	})
-};
+}
