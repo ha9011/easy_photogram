@@ -5,6 +5,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -21,7 +22,7 @@ public class UserController {
 	}	
 	
 	@GetMapping("/user/{id}/update")
-	public String update(@PathVariable String id, @AuthenticationPrincipal PrincipalDetails principalDetails)  {
+	public String update(@PathVariable String id, @AuthenticationPrincipal PrincipalDetails principalDetails, Model model)  {
 		//@AuthenticationPrincipal 을 통해서 시큐리티에 저장된 세션 쉽게 접근!!
 		System.out.println("세션정보 : " + principalDetails.getUser());
 		
@@ -30,7 +31,8 @@ public class UserController {
 		PrincipalDetails mPrincipalDetails = (PrincipalDetails) auth.getPrincipal();
 		System.out.println("직접 세션정보 : " + mPrincipalDetails.getUser());
 
-		
+		// jsp에 값을 넘길때 modelAndView 이
+		model.addAttribute("principal", principalDetails.getUser());
 		return "user/update";
 	}	 
 }
