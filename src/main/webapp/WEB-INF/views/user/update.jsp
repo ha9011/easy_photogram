@@ -53,7 +53,7 @@
 				<div class="content-item__06">
 					<div class="item__title">소개</div>
 					<div class="item__input">
-						<textarea name="${principal.bio}" id="" rows="3">프로그래머</textarea>
+						<textarea name="bio" id="" rows="3">${principal.bio}</textarea>
 					</div>
 				</div>
 				<div class="content-item__07">
@@ -73,14 +73,14 @@
 				<div class="content-item__09">
 					<div class="item__title">전회번호</div>
 					<div class="item__input">
-						<input type="text" name="tel" placeholder="전화번호"
+						<input type="text" name="phone" placeholder="전화번호"
 							value="${principal.phone}" />
 					</div>
 				</div>
 				<div class="content-item__10">
 					<div class="item__title">성별</div>
 					<div class="item__input">
-						<input type="text" name="${principal.gender}" value="남" />
+						<input type="text" name="gender" value="${principal.gender}" />
 					</div>
 				</div>
 
@@ -88,7 +88,7 @@
 				<div class="content-item__11">
 					<div class="item__title"></div>
 					<div class="item__input">
-						<button>제출</button>
+						<button type="button" onclick="update(${principal.id},event)">제출</button>
 					</div>
 				</div>
 				<!--제출버튼end-->
