@@ -24,7 +24,7 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter{
 		// TODO Auto-generated method stub
 		//super.configure(http); // 이 친구가 가로채는 역할을함(인증없을 경우, 로그인 페이지로) //super을 지울 경우 -> 비활성
 		http.authorizeRequests()
-		.antMatchers("/","/user/**","subscribe/**","/comment/**").authenticated()  // 해당 주소는 인증이 필요
+		.antMatchers("/","/user/**","subscribe/**","/comment/**", "/api/**").authenticated()  // 해당 주소는 인증이 필요
 		.anyRequest().permitAll()// 나머지는 모두 허용
 		.and()
 		.formLogin()
