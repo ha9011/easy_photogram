@@ -22,7 +22,8 @@ public class UserController {
 	}	
 	
 	@GetMapping("/user/{id}/update")
-	public String update(@PathVariable String id, @AuthenticationPrincipal PrincipalDetails principalDetails, Model model)  {
+	public String update(@PathVariable String id,
+			@AuthenticationPrincipal PrincipalDetails principalDetails, Model model)  {
 		//@AuthenticationPrincipal 을 통해서 시큐리티에 저장된 세션 쉽게 접근!!
 		System.out.println("세션정보 : " + principalDetails.getUser());
 		
