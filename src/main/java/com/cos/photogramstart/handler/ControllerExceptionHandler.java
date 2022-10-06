@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cos.photogramstart.handler.ex.CustomApiException;
 import com.cos.photogramstart.handler.ex.CustomValidationApiException;
 import com.cos.photogramstart.handler.ex.CustomValidationException;
 import com.cos.photogramstart.util.Script;
@@ -44,11 +45,22 @@ public class ControllerExceptionHandler {
 	
 	@ExceptionHandler(CustomValidationApiException.class) //모든 에러중에 CustomValidationApiException을 낚아 챈다. // 제네릭 ?는 추론이 가
 	//   ajax같은 restApi에는 http통신코드를 담아주는게 좋다  
-	public ResponseEntity<CMRespDto<?>> CustomValidationApiException(CustomValidationApiException e) {
+	public ResponseEntity<?> CustomValidationApiException(CustomValidationApiException e) {
 	
 		log.info("--CustomValidationApiException API 낚아채기--");
 		// 상태값도 같이 격납  
 		return new ResponseEntity<>(new CMRespDto<>(-1, e.getMessage(), e.getErrorMap()), HttpStatus.BAD_REQUEST); // 또 문제되는게 runtimeException getMessage는 String임.. 우린 map으로 담고싶다 
 	}
+	
+	@ExceptionHandler(CustomApiException.class) //모든 에러중에 CustomValidationApiException을 낚아 챈다. // 제네릭 ?는 추론이 가
+	//   ajax같은 restApi에는 http통신코드를 담아주는게 좋다  
+	public ResponseEntity<?> apiException(CustomApiException e) {
+	
+		log.info("--CustomValidationApiException API 낚아채기--");
+		// 상태값도 같이 격납  
+		return new ResponseEntity<>(new CMRespDto<>(-1, e.getMessage(), null), HttpStatus.BAD_REQUEST); // 또 문제되는게 runtimeException getMessage는 String임.. 우린 map으로 담고싶다 
+	}
+	
+	
 	
 }
