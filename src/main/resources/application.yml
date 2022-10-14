@@ -26,9 +26,10 @@ spring:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
     show-sql: true
       
+     
   servlet:
-    multipart:
-      enabled: true
+    multipart:  
+      enabled: true  #사진을  multipart type으로 받겠다.
       max-file-size: 2MB
 
   security:
@@ -37,4 +38,4 @@ spring:
       password: 1234   
 
 file:
-  path: C:/workspace/springbootwork/upload/
+  path: /Users/admin/springbootwork/upload/
