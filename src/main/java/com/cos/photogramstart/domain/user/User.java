@@ -1,15 +1,21 @@
 package com.cos.photogramstart.domain.user;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 
 import org.hibernate.validator.constraints.Length;
+
+import com.cos.photogramstart.domain.image.Image;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -47,9 +53,16 @@ public class User {
 	private String gender;
 	
 	private String role;
-	
+		
 	private String profileLmageUrl;
 
+	// mappedBy -> 나는 연관관계의 주인이 아니다. 그러므로 테이블에 칼럼을 만들지맛! 라는 표시 
+	// User를select 할때 해당 User id로 등록된 image들을 다 가져와
+	// fetch = 설정이 FetchType.LAZY (디폴트) 일 경우 -> User를 Select 할 때 해당 User id의 IMAGE는 '가져오지마' 
+	// fetch = 설정이 FetchType.EAGER 일 경우 -> User를 Select 할 때 해당 User id 의 IMAGE도 "가져와" 
+	@OneToMany(mappedBy =  "user", fetch = FetchType.EAGER) // Image에서 필드명으로 기입
+	private List<Image> images; // 즉,유저와 이미지 정보 모두 들고오려면 양방향 매핑이 필
+	
 	private LocalDateTime createDate;
 	
 	@PrePersist // insert 전에 먼저 생성되어 격

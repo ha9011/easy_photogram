@@ -25,7 +25,9 @@ public class UserController {
 	@GetMapping("/user/{id}")
 	public String profile(@PathVariable int id, Model model)  {
 		User user = userService.회원프로필(id);
-		model.addAttribute("image", user);
+		System.out.println("----id-----");
+		System.out.println(user.getId());
+		model.addAttribute("user", user);
 		return "user/profile";
 	}	
 	

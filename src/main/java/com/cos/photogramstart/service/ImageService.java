@@ -42,7 +42,11 @@ public class ImageService {
 		Image image = imageUploadDto.toEntity(imageFileName, principalDetails.getUser());
 		Image imageEntity = imageRepository.save(image);
 		
-		System.out.println(imageEntity);
+		
+		System.out.println(imageEntity); // 주석을 풀면에러가 남!! imageEntity.toString 실행하는데 오류가 
+		// imageEntity안에서 @Data의 toString이 User <-> Image를 계속 번갈아가며 호출한다. 
+		// 이미지안에 유저있고 유저안에 이미지 있으니 스택오버가 무한으로 쌓임
+		// 따라서 toString을 오버라이드 해서 커스텀해야한다.
 		
 	}
 }
