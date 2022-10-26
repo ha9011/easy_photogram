@@ -17,7 +17,7 @@ function update(userId, event) {
 	}).done(res=>{ // httpstatus code기 200번대 
 		console.log("성공 ! ")
 		console.log(res)
-		//location.href = `/user/${userId}`
+		location.href = `/user/${userId}`
 	}).fail(err=>{ // httpstatus code가 200번대가 아닐 
 	console.log(err)
 		let message = err.responseJSON.data ? JSON.stringify(err.responseJSON.data) : err.responseJSON.message

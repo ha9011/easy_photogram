@@ -35,12 +35,12 @@ public class UserController {
 	public String update(@PathVariable String id,
 			@AuthenticationPrincipal PrincipalDetails principalDetails, Model model)  {
 		//@AuthenticationPrincipal 을 통해서 시큐리티에 저장된 세션 쉽게 접근!!
-		System.out.println("세션정보 : " + principalDetails.getUser());
+		//System.out.println("세션정보 : " + principalDetails.getUser());
 		
 		// 어려운 방법  , 직접찾음 세션 정
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		PrincipalDetails mPrincipalDetails = (PrincipalDetails) auth.getPrincipal();
-		System.out.println("직접 세션정보 : " + mPrincipalDetails.getUser());
+		//Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		//PrincipalDetails mPrincipalDetails = (PrincipalDetails) auth.getPrincipal();
+		//System.out.println("직접 세션정보 : " + mPrincipalDetails.getUser());
 
 		// jsp에 값을 넘길때 modelAndView 이
 		model.addAttribute("principal", principalDetails.getUser());

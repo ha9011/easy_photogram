@@ -20,7 +20,7 @@ public class UserService {
 	private final UserRepository userRepository;
 	private final BCryptPasswordEncoder bCryptPasswordEncoder;
 	
-	@Transactional(readOnly = true)
+	@Transactional(readOnly = true) // select일때는 readonly true로 하면 좋다. 변경감지를 안함 순수 셀렉트로 보기 때문 
 	public User 회원프로필(int userId) {
 		
 		User userEntity = userRepository.findById(userId).orElseThrow(()->{
@@ -35,7 +35,7 @@ public class UserService {
 		// 1. 영속화
 		// 1. 무조건 찾았다 걱정마 get() // 2. 못찾았어 발동시킬께 orElseThrow()
 		// User userEntity = userRepository.findById(id).get();
-		User userEntity = userRepository.findById(22).orElseThrow(() -> {
+		User userEntity = userRepository.findById(id).orElseThrow(() -> {
 			
 				return new CustomValidationApiException("찾을 수 없는 아이디 입니다.");
 			

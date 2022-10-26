@@ -49,15 +49,16 @@ public class UserApiController {
 			throw new CustomValidationApiException("유효성검사  api ", errorMap);
 		}else {
 
-			System.out.println("------");
-			System.out.println(id);
-			System.out.println(userupdateDto);
 			
 			User userEntity = userService.회원수정(id, userupdateDto.toEntity());
 			
 			//세션에 새롭게 변경된 유저정보 교체
 			principalDetails.setUser(userEntity);
+			//return new CMRespDto<>(1,"회원수정완료",userEntity);	
+			// userEntity <- 응답 시 모든 getter 함수가 호출되고 JSON으로 파싱하여 응답한다.
+			//따라서 User <-> Image 무한반복  
 			return new CMRespDto<>(1,"회원수정완료",userEntity);	
+			
 		}
 		
 		

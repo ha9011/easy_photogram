@@ -16,6 +16,7 @@ import javax.persistence.PrePersist;
 import org.hibernate.validator.constraints.Length;
 
 import com.cos.photogramstart.domain.image.Image;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -61,6 +62,7 @@ public class User {
 	// fetch = 설정이 FetchType.LAZY (디폴트) 일 경우 -> User를 Select 할 때 해당 User id의 IMAGE는 '가져오지마' 
 	// fetch = 설정이 FetchType.EAGER 일 경우 -> User를 Select 할 때 해당 User id 의 IMAGE도 "가져와" 
 	@OneToMany(mappedBy =  "user", fetch = FetchType.EAGER) // Image에서 필드명으로 기입
+	@JsonIgnoreProperties({"user"}) //  Image 안에 user는 호출하지마, 무시해!! 
 	private List<Image> images; // 즉,유저와 이미지 정보 모두 들고오려면 양방향 매핑이 필
 	
 	private LocalDateTime createDate;
