@@ -19,7 +19,7 @@ spring:
     password: cos1234
     
   jpa:
-    open-in-view: true
+    open-in-view: true # JPA의 영속성을 유지해서 컨트롤까지 들고감 // false 일 경우, service까지 들고감 따라서 LAZY 설정일 경우 못들고옴(EAGER이면이미 다가져오니 괜춘)
     hibernate:
       ddl-auto: update #create #update
       naming:

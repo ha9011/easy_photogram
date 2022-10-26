@@ -20,7 +20,7 @@ public class UserService {
 	private final UserRepository userRepository;
 	private final BCryptPasswordEncoder bCryptPasswordEncoder;
 	
-	
+	@Transactional(readOnly = true)
 	public User 회원프로필(int userId) {
 		
 		User userEntity = userRepository.findById(userId).orElseThrow(()->{
