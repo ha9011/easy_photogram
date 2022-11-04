@@ -6,6 +6,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.cos.photogramstart.domain.subscribe.SubscribeRepository;
 import com.cos.photogramstart.domain.user.User;
 import com.cos.photogramstart.domain.user.UserRepository;
 import com.cos.photogramstart.handler.ex.CustomException;
@@ -19,6 +20,7 @@ import lombok.RequiredArgsConstructor;
 public class UserService {
 
 	private final UserRepository userRepository;
+	private final SubscribeRepository subscribeRepository;
 	private final BCryptPasswordEncoder bCryptPasswordEncoder;
 	
 	@Transactional(readOnly = true) // select일때는 readonly true로 하면 좋다. 변경감지를 안함 순수 셀렉트로 보기 때문 
@@ -33,6 +35,12 @@ public class UserService {
 		dto.setUser(userEntity);
 		dto.setPageOwnerState(pageUserId==principalId); // true -> 주인 , false -> 주인 아
 		dto.setImageCount(userEntity.getImages().size());
+		
+		int subscribeCount = subscribeRepository.mSubscribeCount(pageUserId);
+		int subscribeState = subscribeRepository.mSubscribeState(principalId, pageUserId);
+
+		dto.setSubscribeCount(subscribeCount);
+		dto.setSubscribeState(subscribeState==1);
 		return dto;
 	}
 	
