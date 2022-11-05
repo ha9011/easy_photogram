@@ -2,6 +2,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 
+<sec:authorize access="isAuthenticated()">
+	<sec:authentication property="principal"  var="principal"/>
+</sec:authorize>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -43,7 +47,7 @@
 					<li class="navi-item"><a href="/image/popular">
 							<i class="far fa-compass"></i>
 						</a></li>
-					<li class="navi-item"><a href="/user/${principal.user.id} }">
+					<li class="navi-item"><a href="/user/${principal.user.id}">
 							<i class="far fa-user"></i>
 						</a></li>
 				</ul>

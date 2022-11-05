@@ -43,7 +43,7 @@ function toggleSubscribe(toUserId, obj) {
 }
 
 // (2) 구독자 정보  모달 보기
-function subscribeInfoModalOpen() {
+function subscribeInfoModalOpen(pageUserId) {
 	$(".modal-subscribe").css("display", "flex");
 }
 
