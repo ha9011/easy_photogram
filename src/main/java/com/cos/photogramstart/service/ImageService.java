@@ -27,7 +27,7 @@ public class ImageService {
 	@Value("${file.path}")
 	private String uploadFolder; 
 	
-	@Transactional(readOnly = true)
+	@Transactional(readOnly = true)// 장점: 영속성 컨텍스트 변경 감지를 해서, 더티체킹, flush(반영)을 하는데, 읽기 전용이라 반영하는 걸 안
 	public List<Image>  이미지스토리(int principalId){
 		List<Image> images = imageRepository.mStory(principalId);
 		return images;
