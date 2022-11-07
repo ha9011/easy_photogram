@@ -44,15 +44,57 @@ function toggleSubscribe(toUserId, obj) {
 
 // (2) 구독자 정보  모달 보기
 function subscribeInfoModalOpen(pageUserId) {
+	console.log(pageUserId)
 	$(".modal-subscribe").css("display", "flex");
+	
+	$.ajax({
+			type:"get",
+			url:`/api/user/${pageUserId}/subscribe`,
+			dataType:"json"
+		}).done(res=>{
+			console.log(res.data);
+			res.data.forEach((u)=>{
+				console.log(u)
+				let item = getSubscribeModalItem(u);
+				$("#subscribeModalList").append(item);
+				
+			})
+		}).fail(error=>{
+			console.log("구독정보 불러오기 실패", error)
+		})
+		
 }
 
-function getSubscribeModalItem() {
-
+function getSubscribeModalItem(u) {
+	let item = `<div class="subscribe__item" id="subscribeModalItem-${u.id}">
+	<div class="subscribe__img">
+		<img src="/upload/${u.profileLmageUrl}" onerror="this.src='/images/person.jpeg'"/>
+	</div>
+	<div class="subscribe__text">
+		<h2>${u.userName}</h2>
+	</div>
+	<div class="subscribe__btn">` ;
+	if(!u.equalUserState){
+		if(u.subscribeState){
+			item +=`
+		<button class="cta blue" onclick="toggleSubscribe(${u.id}, this)">구독취소</button>
+	` 		
+		}else{
+			item +=`
+		<button class="cta" onclick="toggleSubscribe(${u.id}, this)">구독하기</button>
+	`		
+		}
+	}
+	
+	item += `
+	</div>
+</div>`;
+	
+	return item;
 }
 
 
-// (3) 구독자 정보 모달에서 구독하기, 구독취소
+// (3) 구독자 정보 모달에서 구독하기, 구독취소  // 이거 안
 function toggleSubscribeModal(obj) {
 	if ($(obj).text() === "구독취소") {
 		$(obj).text("구독하기");

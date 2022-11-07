@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 public class SubscribeDto {
 	private int id;
 	private String userName;
-	private String profileImageUrl;
+	private String profileLmageUrl;
 	private Integer subscribeState;
 	private Integer equalUserState;
 }

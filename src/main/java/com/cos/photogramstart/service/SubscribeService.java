@@ -41,12 +41,16 @@ public class SubscribeService {
 	
 	@Transactional(readOnly = true)
 	public List<SubscribeDto> 구독리스트(int principalId, int pageUserId) {
+
+		System.out.println(" 내 아이디 : " + principalId);
+		System.out.println(" pageUserId 아이디 : " + pageUserId);
+		
 		StringBuffer sb = new StringBuffer();
-		sb.append("SELECT u.id, u.username, u.profileImageUrl, ");
-		sb.append("IF ((SELECT 1 FROM subscribe WHERE fromUserId = ? AND toUserId = u.id), 1, 0 ) subscribeState ");
+		sb.append("SELECT u.id, u.username, u.profileLmageUrl, ");
+		sb.append("IF ((SELECT 1 FROM subscribe WHERE fromUserId = ? AND toUserId = u.id), 1, 0 ) subscribeState, ");
 		sb.append("IF ((?=u.id), 1, 0) equalUserState ");
 		sb.append("FROM user u INNER JOIN subscribe s ");
-		sb.append("ON u.id = s.toUserId");
+		sb.append("ON u.id = s.toUserId ");
 		sb.append("WHERE s.fromUserId = ?"); // 세미콜론 ㄴ
 		
 		Query query = em.createNativeQuery(sb.toString())
@@ -58,9 +62,8 @@ public class SubscribeService {
 		//  DTO에 매핍하기 위해 쓰
 		List<SubscribeDto> subscribeDtos = result.list(query,  SubscribeDto.class);
 				
-		subscribeRepository.mUnSubscribe(principalId, pageUserId);
 		 
-		return null;
+		return subscribeDtos;
 		
 	}
 }
