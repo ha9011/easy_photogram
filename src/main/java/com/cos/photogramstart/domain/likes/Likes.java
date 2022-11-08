@@ -50,7 +50,7 @@ public class Likes {
 
 	private LocalDateTime createDate;
 
-	@PrePersist // insert 전에 먼저 생성되어 격
+	@PrePersist // insert 전에 먼저 생성되어 격납 // native 쿼리 쓰면 격납이 안됨
 	public void createDate() {
 		this.createDate = LocalDateTime.now();
 
