@@ -45,7 +45,7 @@ public class ImageApiController {
 		return new ResponseEntity<>(new CMRespDto<>(1, "좋아요 	성공",null), HttpStatus.CREATED);
 	}
 	
-	@PostMapping("/api/image/{imageId}/likes")
+	@PostMapping("/api/image/{imageId}/unlikes")
 	public ResponseEntity<?> imageUnLikes(@AuthenticationPrincipal PrincipalDetails principalDetails,
 			@PathVariable int imageId){
 		
