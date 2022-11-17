@@ -53,6 +53,9 @@ public class Image {
 	@Transient //DB에 컬럼이 만들어지지 않는다
 	private Boolean likeState;
 	
+
+	@Transient //DB에 컬럼이 만들어지지 않는다
+	private int likeCount;
 	
 	private LocalDateTime createDate;
 	

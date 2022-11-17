@@ -33,7 +33,10 @@ public class ImageService {
 	public Page<Image>  이미지스토리(int principalId, Pageable pageable){
 		Page<Image> images = imageRepository.mStory(principalId, pageable);
 		
+		
 		images.forEach((image)->{
+		
+			image.setLikeCount(image.getLikes().size());
 			image.getLikes().forEach((like)->{
 				// 해당 이미지를 좋아요한 사람들을 찾아서 현재 로긴한 사람이 좋아요 한것인지 비교 	
 				if(like.getToUser().getId() == principalId) {
