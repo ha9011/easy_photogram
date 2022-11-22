@@ -108,14 +108,42 @@ $(window).scroll(() => {
 // (3) 좋아요, 안좋아요
 function toggleLike(imageId) {
 	let likeIcon = $(`#storyLikeIcon-${imageId}`);
-	if (likeIcon.hasClass("far")) {
-		likeIcon.addClass("fas");
+	
+	if (likeIcon.hasClass("far")) { // 좋아요를 하겠다
+		$.ajax({
+			type:"post",
+			url:`/api/image/${imageId}/likes`
+		}).done(res=>{
+			let likeCountStr = $(`#storyLikeCount-${imageId}`).text();
+			let count = Number(likeCountStr)+1
+			$(`#storyLikeCount-${imageId}`).text(count);
+			
+			
+			likeIcon.addClass("fas");
 		likeIcon.addClass("active");
-		likeIcon.removeClass("far");
-	} else {
-		likeIcon.removeClass("fas");
-		likeIcon.removeClass("active");
-		likeIcon.addClass("far");
+		likeIcon.removeClass("far");	
+		}).fail(error=>{
+			alert("좋아요 오")
+		});
+		
+	} else { // 좋아요를 취소하겠다
+		$.ajax({
+			type:"delete",
+			url:`/api/image/${imageId}/likes`
+		}).done(res=>{
+						let likeCountStr = $(`#storyLikeCount-${imageId}`).text();
+			let count = Number(likeCountStr)-1;
+			$(`#storyLikeCount-${imageId}`).text(count);
+			
+			
+			
+			likeIcon.removeClass("fas");
+			likeIcon.removeClass("active");
+			likeIcon.addClass("far");
+		}).fail(error=>{
+			alert("좋아요 오")
+		});
+		
 	}
 }
 
