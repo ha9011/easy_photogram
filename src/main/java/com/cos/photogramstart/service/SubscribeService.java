@@ -1,15 +1,24 @@
 package com.cos.photogramstart.service;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
+import java.util.UUID;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import org.qlrm.mapper.JpaResultMapper;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.cos.photogramstart.domain.image.Image;
 import com.cos.photogramstart.domain.subscribe.SubscribeRepository;
+import com.cos.photogramstart.domain.user.User;
+import com.cos.photogramstart.domain.user.UserRepository;
 import com.cos.photogramstart.handler.ex.CustomApiException;
 import com.cos.photogramstart.web.dto.subscribe.SubscribeDto;
 
@@ -21,6 +30,9 @@ public class SubscribeService {
 	
 	private final SubscribeRepository subscribeRepository;
 	private final EntityManager em; // 모든 repository는 EM을 구현해서 만들어져 있는 구현
+	
+	
+	
 	@Transactional
 	public void 구독하기(int fromUserId, int toUserId) {
 		// native query 왜냐하면 user객체로 일일이 담기가 쉽지 않음(복잡)	
@@ -66,4 +78,6 @@ public class SubscribeService {
 		return subscribeDtos;
 		
 	}
+	
+	
 }
