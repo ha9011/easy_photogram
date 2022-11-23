@@ -72,5 +72,11 @@ public class ImageService {
 		// 이미지안에 유저있고 유저안에 이미지 있으니 스택오버가 무한으로 쌓임
 		// 따라서 toString을 오버라이드 해서 커스텀해야한다.
 		
+		
+	}
+
+	@Transactional(readOnly = true)
+	public List<Image> 인기사진(){
+		return imageRepository.mPopular();
 	}
 }

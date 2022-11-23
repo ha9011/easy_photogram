@@ -15,6 +15,7 @@ import javax.persistence.UniqueConstraint;
 import com.cos.photogramstart.domain.image.Image;
 import com.cos.photogramstart.domain.subscribe.Subscribe;
 import com.cos.photogramstart.domain.user.User;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -44,6 +45,7 @@ public class Likes {
 	private Image image; // 하나의 이미지는 여러 라이크를 받을 수 있다, 1 : n
 
 	// 오류가 터지고 나서 잡아봅시다. // 
+	@JsonIgnoreProperties({"images"})
 	@JoinColumn(name = "userId") // 
 	@ManyToOne
 	private User toUser; // 하나의 유저는 여러 개를 좋아요 할 수 있다. 1:n	
