@@ -44,14 +44,11 @@ public class CommentController {
 		return new ResponseEntity<>(new CMRespDto<>(1, "댓글쓰기성공", comment), HttpStatus.CREATED);
 		}
 	
-	@DeleteMapping("/api/comment")
+	@DeleteMapping("/api/comment/{id}")
 	public ResponseEntity<?> commentDelete(
-			@AuthenticationPrincipal PrincipalDetails principalDetails,
-			@PathVariable int imageId
+			@PathVariable int id
 			){
-		
-
-		commentService.댓글삭제();
-		return null;
-	}
+		commentService.댓글삭제(id);
+		return new ResponseEntity<>(new CMRespDto<>(1, "댓글삭제성공", null), HttpStatus.OK);
+		}
 }
