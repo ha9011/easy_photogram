@@ -13,14 +13,17 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cos.photogramstart.config.auth.PrincipalDetails;
+import com.cos.photogramstart.domain.comment.Comment;
 import com.cos.photogramstart.domain.image.Image;
 import com.cos.photogramstart.service.CommentService;
 import com.cos.photogramstart.service.ImageService;
 import com.cos.photogramstart.service.LikesService;
 import com.cos.photogramstart.web.dto.CMRespDto;
+import com.cos.photogramstart.web.dto.comment.CommentDto;
 
 import lombok.RequiredArgsConstructor;
 
@@ -32,11 +35,13 @@ public class CommentController {
 		
 	@PostMapping("/api/comment")
 	public ResponseEntity<?> commentSave(
-			@AuthenticationPrincipal PrincipalDetails principalDetails,
-			@PathVariable int imageId
+			@RequestBody CommentDto commentDto,
+			@AuthenticationPrincipal PrincipalDetails principalDetails
 			){
-		commentService.댓글쓰기();
-		return null;
+		// json	타입으로 받을때 @requestBody
+		System.out.println(commentDto);
+		Comment comment = commentService.댓글쓰기(commentDto.getContent(), commentDto.getImageId(), principalDetails.getUser().getId());
+		return new ResponseEntity<>(new CMRespDto<>(1, "댓글쓰기성공", comment), HttpStatus.CREATED);
 		}
 	
 	@DeleteMapping("/api/comment")
