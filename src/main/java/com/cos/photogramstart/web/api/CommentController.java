@@ -47,20 +47,21 @@ public class CommentController {
 			BindingResult bindingResult,
 			@AuthenticationPrincipal PrincipalDetails principalDetails
 			){
-			if(bindingResult.hasErrors()) {
-
-				Map<String, String> errorMap = new HashMap<>();
-			
-			for(FieldError error : bindingResult.getFieldErrors()) {
-				errorMap.put(error.getField(), error.getDefaultMessage());
-				
-			}
-			
-			//return "오류남";
-			//강제로 에러발생시키기
-			//throw new RuntimeException("유효성검사 실패함");
-			throw new CustomValidationApiException("유효성검사  api ", errorMap);
-		}
+//			if(bindingResult.hasErrors()) {
+//
+//				Map<String, String> errorMap = new HashMap<>();
+//			
+//			for(FieldError error : bindingResult.getFieldErrors()) {
+//				errorMap.put(error.getField(), error.getDefaultMessage());
+//				
+//			}
+//			
+//			//return "오류남";
+//			//강제로 에러발생시키기
+//			//throw new RuntimeException("유효성검사 실패함");
+//			throw new CustomValidationApiException("유효성검사  api ", errorMap);
+//		}
+		// AOP 처리 	
 		
 		// json	타입으로 받을때 @requestBody
 		System.out.println(commentDto);

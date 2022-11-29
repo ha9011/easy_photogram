@@ -57,23 +57,23 @@ public class AuthController {
 		log.info("**************");
 		log.info("**************");
 		// @valid 해서 유효성검사 오류시, bindingResult에 담김,
-		if(bindingResult.hasErrors()) {
-
-			log.info("**************");
-			Map<String, String> errorMap = new HashMap<>();
-			
-			for(FieldError error : bindingResult.getFieldErrors()) {
-				errorMap.put(error.getField(), error.getDefaultMessage());
-				log.info("__유효성 검사 실패--");
-				log.info(error.getDefaultMessage());
-			}
-			
-			//return "오류남";
-			//강제로 에러발생시키기
-			//throw new RuntimeException("유효성검사 실패함");
-			throw new CustomValidationException("유효성검사 ", errorMap);
-		}
-		
+//		if(bindingResult.hasErrors()) {
+//
+//			log.info("**************");
+//			Map<String, String> errorMap = new HashMap<>();
+//			
+//			for(FieldError error : bindingResult.getFieldErrors()) {
+//				errorMap.put(error.getField(), error.getDefaultMessage());
+//				log.info("__유효성 검사 실패--");
+//				log.info(error.getDefaultMessage());
+//			}
+//			
+//			//return "오류남";
+//			//강제로 에러발생시키기
+//			//throw new RuntimeException("유효성검사 실패함");
+//			throw new CustomValidationException("유효성검사 ", errorMap);
+//		}
+		//  AOP로 처리
 		
 		log.info(signupDto.toString());
 		

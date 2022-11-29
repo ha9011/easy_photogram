@@ -56,21 +56,21 @@ public class UserApiController {
 			BindingResult bindingResult,  // 반드시 @valid 뒤에 있는 친구 뒤에 있어야
 			@AuthenticationPrincipal PrincipalDetails principalDetails) {
 		
-		if(bindingResult.hasErrors()) {
-
-			Map<String, String> errorMap = new HashMap<>();
-			
-			for(FieldError error : bindingResult.getFieldErrors()) {
-				errorMap.put(error.getField(), error.getDefaultMessage());
-				
-			}
-			
-			//return "오류남";
-			//강제로 에러발생시키기
-			//throw new RuntimeException("유효성검사 실패함");
-			throw new CustomValidationApiException("유효성검사  api ", errorMap);
-		}else {
-
+//		if(bindingResult.hasErrors()) {
+//
+//			Map<String, String> errorMap = new HashMap<>();
+//			
+//			for(FieldError error : bindingResult.getFieldErrors()) {
+//				errorMap.put(error.getField(), error.getDefaultMessage());
+//				
+//			}
+//			
+//			//return "오류남";
+//			//강제로 에러발생시키기
+//			//throw new RuntimeException("유효성검사 실패함");
+//			throw new CustomValidationApiException("유효성검사  api ", errorMap);
+//		}
+// AOP처
 			
 			User userEntity = userService.회원수정(id, userupdateDto.toEntity());
 			
@@ -84,7 +84,7 @@ public class UserApiController {
 		}
 		
 		
-	}
+	
 	
 	@GetMapping("/api/user/{pageUserId}/subscribe")
 	public ResponseEntity<?> subscribeList(
